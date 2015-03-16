@@ -1,0 +1,69 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+#include <iostream>
+#include <cmath>
+#include <queue>
+#include <map>
+#include <stack>
+#include <list>
+#include <vector>
+#include <ctime>
+#define LL __int64
+#define EPS 1e-8
+using namespace std;
+LL m,a,b,s,t,p;
+bool v1[1000000005];
+map<int,int>ma;
+LL KSM(LL a,LL b)
+{
+	LL s=1,k=a;
+	while (b!=0)
+	{
+		if (b&1) s=s*k%p;
+		k=k*k%p;
+		b>>=1;
+	}
+	return s;
+}
+int main()
+{
+	while (~scanf("%I64d %I64d %I64d %I64d %I64d %I64d",&m,&a,&b,&s,&t,&p) && m)
+	{
+		ma.clear();
+		LL bb=KSM(bb,s-1);
+		int k=1;
+		LL aa=m%p;
+		memset(v1,0,sizeof(v1));
+		while (1)
+		{
+			if (v1[bb] || k>t)
+				break;
+			v1[bb]=1;
+			bb=bb*b%p;
+			k++;
+		}
+		int ans;
+		k=0;
+		while (1)
+		{
+			if (v1[aa]==1)
+			{
+				ans=k;
+				break;
+			}
+			if (ma[aa]==1 || (k>t-s+1))
+			{
+				ans=-1;
+				break;
+			}
+			ma[aa]=1;
+			aa=aa*a%p;
+			k++;
+		}
+		if (ans==-1) printf("impossible\n");
+		else printf("%d\n",ans);
+	}
+	return 0;
+}
